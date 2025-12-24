@@ -40,15 +40,15 @@ const App: React.FC = () => {
   const handleExtractedColors = (extracted: any[]) => {
     const newColors: ColorInfo[] = extracted.map((c, index) => ({
       id: `extracted-${Date.now()}-${index}`,
-      name: c.name || '提取色',
-      pantoneName: c.pantone,
+      name: c.name || 'AI 提取色',
+      pantoneName: c.pantone || 'PANTONE UNKNOWN',
       hex: c.hex,
       rgb: hexToRgbString(c.hex),
       source: 'AI 图像提取',
       category: 'Campus' as any
     }));
     
-    // 将新提取的颜色置顶添加到库中
+    // 将新提取的颜色置顶添加到色库中
     setAllColors(prev => [...newColors, ...prev]);
   };
 
@@ -57,14 +57,14 @@ const App: React.FC = () => {
       {showIntro && <IntroAnimation onComplete={() => setShowIntro(false)} />}
       <ColorModal color={selectedColor} onClose={() => setSelectedColor(null)} />
 
-      {/* 顶部导航 */}
+      {/* 导航栏 */}
       <nav className={`fixed top-0 w-full z-40 transition-all duration-700 ${isScrolled ? 'bg-white/90 backdrop-blur-2xl border-b border-slate-100 py-3 shadow-sm' : 'bg-transparent py-8'}`}>
         <div className="container mx-auto px-8 flex justify-between items-center">
           <div className="flex items-center gap-8">
             {!navLogoError ? (
               <img 
                 src="https://generativelabs-prod.s3.us-east-1.amazonaws.com/media/images/f3f3f0be-7e61-4568-9640-5e865ee15f34.png" 
-                alt="兰工院 Logo" 
+                alt="LZIT Logo" 
                 className={`transition-all duration-700 object-contain ${isScrolled ? 'h-10 w-auto' : 'h-16 w-auto'}`}
                 onError={() => setNavLogoError(true)}
               />
@@ -97,7 +97,7 @@ const App: React.FC = () => {
         </div>
       </nav>
 
-      {/* 英雄版块 */}
+      {/* 头部展示 */}
       <header className="pt-48 pb-16 px-8 relative overflow-hidden">
         <div className="container mx-auto">
           <div className="max-w-4xl relative z-10">
@@ -109,18 +109,19 @@ const App: React.FC = () => {
               <span className="text-[#96191C]">工院记忆.</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-500 font-medium leading-relaxed max-w-2xl border-l-8 border-[#96191C]/20 pl-10" style={{ fontFamily: "'Noto Serif SC', serif" }}>
-              每一抹色彩都承载着建校 80 余载的历史底蕴。我们通过数字化的方式，将那些停留在砖瓦、湖泊与书卷间的视觉印象，转化为精确的专业色彩规范。
+              每一抹色彩都承载着建校 80 余载的历史底蕴。我们通过数字化的方式，将那些停留在砖瓦、湖泊与书卷间的视觉印象转化为精确的色彩规范。
             </p>
           </div>
           
+          {/* AI 图像颜色提取器 */}
           <ImageAnalyzer onColorsExtracted={handleExtractedColors} />
         </div>
       </header>
 
-      {/* 色库网格 */}
+      {/* 色库内容区 */}
       <main className="container mx-auto px-8 pb-40 mt-24">
         <div className="flex items-center gap-8 mb-20">
-            <h2 className="text-sm font-black text-slate-900 tracking-[1em] whitespace-nowrap">色彩典藏库</h2>
+            <h2 className="text-sm font-black text-slate-900 tracking-[1em] whitespace-nowrap uppercase">色彩典藏库 / Archive</h2>
             <div className="h-px flex-1 bg-gradient-to-r from-slate-100 to-transparent"></div>
             <span className="text-[10px] text-[#96191C] font-black uppercase tracking-widest bg-[#96191C]/5 px-4 py-1.5 rounded-full border border-[#96191C]/10">
               当前展示 {filteredColors.length} 种经典色相
@@ -139,7 +140,7 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      {/* 全球页脚 */}
+      {/* 部署版页脚 - 包含指定版权信息 */}
       <footer className="py-20 bg-slate-50 px-8 border-t border-slate-100">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
             <div className="flex items-center gap-6">
@@ -148,18 +149,18 @@ const App: React.FC = () => {
                   {!footerLogoError ? (
                     <img 
                       src="https://generativelabs-prod.s3.us-east-1.amazonaws.com/media/images/f3f3f0be-7e61-4568-9640-5e865ee15f34.png" 
-                      className="h-10 w-auto object-contain" 
-                      alt="" 
+                      className="h-12 w-auto object-contain" 
+                      alt="LZIT Logo" 
                       onError={() => setFooterLogoError(true)}
                     />
                   ) : (
-                    <div className="h-10 w-10 rounded-full border-2 border-[#96191C] flex items-center justify-center">
+                    <div className="h-12 w-12 rounded-full border-2 border-[#96191C] flex items-center justify-center">
                       <span className="text-[10px] font-black text-[#96191C]">LZIT</span>
                     </div>
                   )}
                   <div>
-                      <p className="text-lg font-black text-slate-900 tracking-tight">版权为兰州工业学院艺术设计学院</p>
-                      <p className="text-[10px] text-slate-400 font-bold tracking-widest uppercase mt-1">inspection灵感设计出品</p>
+                      <p className="text-lg font-black text-slate-900 tracking-tight leading-none mb-1">版权为兰州工业学院艺术设计学院</p>
+                      <p className="text-[10px] text-slate-400 font-bold tracking-widest uppercase">inspection灵感设计出品</p>
                   </div>
                 </div>
             </div>

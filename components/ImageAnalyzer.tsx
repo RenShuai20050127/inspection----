@@ -74,7 +74,6 @@ const ImageAnalyzer: React.FC<ImageAnalyzerProps> = ({ onColorsExtracted }) => {
       if (response.text) {
         const parsedColors = JSON.parse(response.text.trim());
         setColors(parsedColors);
-        // 如果有回调，通知父组件添加至全局色库
         if (onColorsExtracted) {
           onColorsExtracted(parsedColors);
         }

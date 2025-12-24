@@ -23,7 +23,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
   return (
     <div className={`fixed inset-0 z-[200] flex flex-col items-center justify-center bg-white transition-opacity duration-1000 ${stage === 3 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
       <div className="relative flex flex-col items-center w-full max-w-2xl px-6 text-center">
-        {/* Logo 区域：如果图片加载失败，显示 LZIT 缩写 */}
+        {/* Logo 区域 */}
         <div className={`mb-10 transition-all duration-1000 transform ${stage >= 1 ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}>
           {!logoError ? (
             <img 
@@ -47,7 +47,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
           {SCHOOL_NAME_EN}
         </p>
 
-        {/* 校训：强制不换行 */}
+        {/* 校训：强制单行显示 */}
         <div className={`mt-16 w-full transition-all duration-1000 ${stage >= 2 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
           <p className="text-xl md:text-3xl text-[#96191C] font-black tracking-[0.4em] md:tracking-[0.8em] text-center border-y border-[#96191C]/10 py-6 whitespace-nowrap overflow-hidden">
             {MOTTO}
