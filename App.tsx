@@ -48,7 +48,7 @@ const App: React.FC = () => {
       category: 'Campus' as any
     }));
     
-    // 将新提取的颜色置顶
+    // 将新提取的颜色置顶添加到库中
     setAllColors(prev => [...newColors, ...prev]);
   };
 
@@ -166,6 +166,7 @@ const App: React.FC = () => {
             <div className="flex flex-wrap justify-center gap-x-16 gap-y-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">
                 <a href="#" className="hover:text-[#96191C] transition-colors border-b-2 border-transparent hover:border-[#96191C] pb-1">视觉指南</a>
                 <a href="#" className="hover:text-[#96191C] transition-colors border-b-2 border-transparent hover:border-[#96191C] pb-1">品牌资源</a>
+                <a href="#" className="hover:text-[#96191C] transition-colors border-b-2 border-transparent hover:border-[#96191C] pb-1">校准资源</a>
             </div>
         </div>
       </footer>
